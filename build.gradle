@@ -43,7 +43,7 @@ subprojects {
         manifest {
             attributes(
                 "Main-Class": project.name.capitalize(),
-                "Class-Path": configurations.runtime.resolve().collect { it.toURI() }.join(' ')
+                "Class-Path": '/usr/share/java/ice-3.7.10'
             )
         }
     }
