@@ -29,13 +29,16 @@ public class TransferI implements FileTransfer.Transfer{
             KeyFactory keyFactory = KeyFactory.getInstance("EC");
             X509EncodedKeySpec pkSpec = new X509EncodedKeySpec(Base64.getDecoder().decode(clientPublicKey));
             PublicKey clientKey = keyFactory.generatePublic(pkSpec);
+
             KeyAgreement ka = KeyAgreement.getInstance("ECDH");
             ka.init(this.serverKeyPair.getPrivate());
             ka.doPhase(clientKey, true);
             byte[] sharedSecret = ka.generateSecret();
+
             MessageDigest hash = MessageDigest.getInstance("SHA-256");
             byte[] aesKeyBytes = hash.digest(sharedSecret);
             this.aesKey = new SecretKeySpec(aesKeyBytes, 0, 32, "AES");
+
             return Base64.getEncoder().encodeToString(this.serverKeyPair.getPublic().getEncoded());
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -48,7 +51,9 @@ public class TransferI implements FileTransfer.Transfer{
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.DECRYPT_MODE, aesKey);
             byte[] decryptedFile = cipher.doFinal(fileContent);
+
             Files.write(Paths.get("received_" + fileName), decryptedFile);
+
             return "File Received";
         } catch (Exception e) {
             return "File Missed";
@@ -61,7 +66,9 @@ public class TransferI implements FileTransfer.Transfer{
             byte[] receivedFile = Files.readAllBytes(Paths.get("received_" + fileName));
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] serverFileHash = digest.digest(receivedFile);
+
             String serverFileHashString = Base64.getEncoder().encodeToString(serverFileHash);
+
             return serverFileHashString.equals(fileHash) ? "Hashes match" : "Hashes do not match";
         } catch (Exception e) {
             throw new RuntimeException(e);

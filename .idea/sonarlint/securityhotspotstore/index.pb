@@ -18,3 +18,10 @@ P
  client/src/main/java/Client.java,2/6/26115404648113c7f6e10fe4959d0e9056cae33b
 e
 5server/build/generated-src/FileTransfer/Transfer.java,1/9/196b8df3e974e4fe064f377cc42372682af51344
+N
+client/src/main/java/Main.java,e/c/ecb7a1924b25558f5bedb6f53e4d6092557bd541
+:
+
+enviar.txt,5/8/58821afec777d32aa28588b93207000e8ffb48fa
+C
+received_enviar.txt,7/a/7acaf6876311e4426027fa9c74c446a0acb2e777
