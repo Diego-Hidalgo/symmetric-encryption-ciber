@@ -3,10 +3,6 @@
 FileTransfer.ice,6/b/6bbe3f5898e6095d4c231ba04d34e2df92a375a6
 <
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
-M
-FileTransfer/TransferPrx.java,0/1/016ae8a92927f69479fb843015fd30078037ef4c
-J
-FileTransfer/Transfer.java,3/f/3fd02e37431d423d6f52ad1ae66c053dcef3172d
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
@@ -20,3 +16,5 @@ S
 settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233
 P
  client/src/main/java/Client.java,2/6/26115404648113c7f6e10fe4959d0e9056cae33b
+e
+5server/build/generated-src/FileTransfer/Transfer.java,1/9/196b8df3e974e4fe064f377cc42372682af51344

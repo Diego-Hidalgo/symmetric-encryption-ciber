@@ -4,7 +4,7 @@ module FileTransfer
 
     interface Transfer {
         string negotiateKey(string clientPublicKey);
-        void sendFile(string fileName, byteSeq fileContent);
-        string receiveHash(string fileHash);
+        string sendFile(string fileName, byteSeq fileContent);
+        string receiveHash(string fileHash, string fileName);
     };
 };

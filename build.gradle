@@ -21,6 +21,7 @@ subprojects {
             files = [file("../FileTransfer.ice")]
         }
     }
+ 
     //
     // Use Ice JAR files from maven central repository
     //
@@ -42,7 +43,7 @@ subprojects {
         manifest {
             attributes(
                 "Main-Class": project.name.capitalize(),
-                "Class-Path": 'usr/share/java/ice-3.7.10.jar'
+                "Class-Path": configurations.runtime.resolve().collect { it.toURI() }.join(' ')
             )
         }
     }
