@@ -1,0 +1,3 @@
+rootProject.name = 'secure-transfer'
+include 'client'
+include 'server'
