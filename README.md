@@ -7,10 +7,6 @@ The file transfer is encrypted using AES-256 with symmetric key negotiated via c
 - **Gradle 7.2** 
 - **ZeroC Ice 3.7.10** Can be downloaded from their web page here: [Download Ice](https://zeroc.com/ice/downloads/3.7)
 
-## Server and client configuration
-
-If you want to run the programs locally ignore this step
-
 ## Execution
 
 You can run the programs by following the next instructions.
