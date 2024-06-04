@@ -1,6 +1,8 @@
 import javax.crypto.*;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.*;
@@ -131,9 +133,10 @@ public class DHFileSender {
      * @throws NoSuchPaddingException  Cipher error
      * @throws NoSuchAlgorithmException If the algorithm for cipher does not exist.
      */
-    private byte[] encryptFile(byte[] fileContent) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException {
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.ENCRYPT_MODE, this.aesKey);
+    private byte[] encryptFile(byte[] fileContent) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, UnsupportedEncodingException, InvalidAlgorithmParameterException {
+        IvParameterSpec ivParameterSpec = new IvParameterSpec("aaaabbbbccccdddd".getBytes("ASCII"));
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, this.aesKey,ivParameterSpec);
         return cipher.doFinal(fileContent);
     }
 

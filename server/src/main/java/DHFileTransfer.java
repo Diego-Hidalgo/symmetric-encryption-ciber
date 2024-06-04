@@ -2,6 +2,7 @@ import com.zeroc.Ice.Current;
 import javax.crypto.*;
 import javax.crypto.interfaces.DHPublicKey;
 import javax.crypto.spec.DHParameterSpec;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -101,15 +102,17 @@ public class DHFileTransfer implements FileTransfer.SymmetricKeyFileTransfer{
     public boolean sendFile(String fileName, byte[] fileContent, Current current) {
 
         try {
-            Cipher cipher = Cipher.getInstance("AES");
-            cipher.init(Cipher.DECRYPT_MODE, aesKey);
+            IvParameterSpec ivParameterSpec = new IvParameterSpec("aaaabbbbccccdddd".getBytes("ASCII"));
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            cipher.init(Cipher.DECRYPT_MODE, aesKey,ivParameterSpec);
             byte[] decryptedFile = cipher.doFinal(fileContent);
 
             Files.write(Paths.get("received_" + fileName), decryptedFile);
 
             return true;
         } catch (Exception e) {
-            return false;
+            throw new RuntimeException(e);
+            //return false;
         }
     }
 
