@@ -1,6 +1,49 @@
-# Encrypted File Transfer (AES-256 + Diffie-Hellman)
-This repository consists of two programs, a client and a server. The client sends a file to the server, the file is specified via java arguments.
-The file transfer is encrypted using AES-256 with symmetric key negotiated via conventional Diffie-Hellman algorithm.
+## Informe del Proyecto: Transferencia Segura de Archivos con Diffie-Hellman y AES-256
+
+**Integrantes del Equipo:**
+
+* [Juan Fernando Martínez]
+* [Diego Hidalgo]
+* [Brian Romero]
+
+**Descripción del Proyecto**
+
+Este proyecto implementa un sistema de transferencia segura de archivos entre un cliente y un servidor, utilizando el framework Ice de ZeroC para la comunicación. Se aplican las siguientes tecnologías y algoritmos para garantizar la seguridad y la integridad de los datos:
+
+* **Intercambio de claves Diffie-Hellman (DH):** Este algoritmo nos permite establecer una clave secreta compartida entre el cliente y el servidor a través de un canal inseguro.
+* **Cifrado AES-256:** Este cifrado nos permite utilizar la clave secreta negociada con DH para cifrar el archivo antes de la transmisión, asegurando la confidencialidad de los datos.
+* **Hash SHA-256:** Se calcula el hash del archivo original y se envía al servidor para verificar que el archivo recibido no ha sido alterado durante la transferencia.
+
+**Implementación**
+
+El proyecto consta de cuatro clases principales:
+
+* **`Client.java`:** Clase principal para el uso del cliente que inicia la conexión con el servidor, negocia la clave DH y envía el archivo cifrado.
+* **`DHFileSender.java`:** Maneja la negociación de claves DH en el lado del cliente, el cifrado AES y el envío del archivo.
+* **`DHFileTransfer.java`:** Una implementación de la interfaz `SymmetricKeyFileTransfer` de Ice, que nos permite definir las operaciones para la negociación de claves, recepción del archivo y verificación del hash en el lado del servidor.
+* **`Server.java`:** Clase principal del para el servidor que inicia el servicio Ice y espera conexiones de los clientes.
+
+**Flujo del Programa**
+
+1. El cliente inicia la conexión con el servidor.
+2. El cliente y el servidor negocian una clave secreta compartida utilizando DH.
+3. El cliente cifra el archivo con AES-256 utilizando la clave secreta.
+4. El cliente envía el archivo cifrado y su hash SHA-256 al servidor.
+5. El servidor recibe y descifra el archivo.
+6. El servidor calcula el hash SHA-256 del archivo recibido y lo compara con el hash enviado por el cliente.
+7. El servidor informa al cliente si la transferencia fue exitosa y si los hashes coinciden.
+
+**Dificultades y Soluciones**
+
+* **Configuración de Ice:** Tuvimos algunos problemas iniciales para configurar correctamente el entorno Ice y los archivos de configuración del cliente y servidor. Investigamos en la documentación de ZeroC y en línea para resolverlos.
+* **Implementación de DH:** La implementación del intercambio de claves DH requirió estudiar nuevamente los conceptos de criptografía para comprender de manera más profunda lo que necesitabamos para utilizar correctamente las clases de Java para generar e intercambiar claves.
+
+**Conclusiones**
+
+En este proyecto logramos implementar un sistema de transferencia de archivos seguro que utiliza técnicas criptográficas robustas para proteger la confidencialidad y la integridad de los datos. Con esta implementación conseguimos un reforzar nuestros conocimientos en criptográfia, además nos permitio practicar y aprender nuevas cosas sobre el framework Ice de ZeroC, el intercambio de claves Diffie-Hellman y el cifrado AES-256.
+
+
+## How to run the program
 
 ## Requirements
 - **Java 17**
