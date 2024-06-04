@@ -25,11 +25,13 @@ El proyecto consta de cuatro clases principales:
 
 **Flujo del Programa**
 
-1. El cliente inicia la conexión con el servidor.
+1. El servidor inicia y escucha por el puerto definido en el archivo de configuración.
+2. El cliente inicia la conexión con el servidor por el puerto definido.
 2. El cliente y el servidor negocian una clave secreta compartida utilizando DH.
 3. El cliente cifra el archivo con AES-256 utilizando la clave secreta.
-4. El cliente envía el archivo cifrado y su hash SHA-256 al servidor.
+4. El cliente envía el archivo cifrado.
 5. El servidor recibe y descifra el archivo.
+6. El cliente envía el hash SHA-256 del archivo enviado al servidor.
 6. El servidor calcula el hash SHA-256 del archivo recibido y lo compara con el hash enviado por el cliente.
 7. El servidor informa al cliente si la transferencia fue exitosa y si los hashes coinciden.
 
