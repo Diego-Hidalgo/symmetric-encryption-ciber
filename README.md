@@ -41,20 +41,20 @@ do the following on the project root:
         FileAdapter.Endpoints=tcp -p SERVER_AVAILABLE_PORT
         Ice.Default.Host=YOUR_SERVER_IP_ADDRESS
      ``` 
-4. Copy the project to your client and server machines.
+3. Copy the project to your client and server machines.
 
 On the server at the project root:
 
-5. Build the project
+4. Build the project
 `./gradlew build`
 
-6. Run the server
+5. Run the server
 `java -jar ./server/build/libs/server.jar`
 
 On the client at the project root:
 
-7. Build the project
+6. Build the project
 `./gradlew build`
 
-8. Run the client with the file you want to send as argument
+7. Run the client with the file you want to send as argument
 `java -jar ./client/build/libs/client.jar /path/to/file.txt`
