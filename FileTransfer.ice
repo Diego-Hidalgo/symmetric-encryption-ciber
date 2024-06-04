@@ -2,9 +2,9 @@ module FileTransfer
 {
     sequence<byte> byteSeq;
 
-    interface Transfer {
+    interface SymmetricKeyFileTransfer {
         string negotiateKey(string encodedClientPublicKey);
-        string sendFile(string fileName, byteSeq fileContent);
-        string receiveHash(string fileHash, string fileName);
+        bool sendFile(string fileName, byteSeq fileContent);
+        bool verifyHash(string fileName, string fileHash );
     };
 };

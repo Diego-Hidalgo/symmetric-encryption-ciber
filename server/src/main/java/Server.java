@@ -6,7 +6,7 @@ public class Server
         try(com.zeroc.Ice.Communicator communicator = com.zeroc.Ice.Util.initialize(args, "server.cfg", extraArgs))
         {
             com.zeroc.Ice.ObjectAdapter adapter = communicator.createObjectAdapter("FileAdapter");
-            com.zeroc.Ice.Object object = new TransferI();
+            com.zeroc.Ice.Object object = new DHFileTransfer();
             adapter.add(object, com.zeroc.Ice.Util.stringToIdentity("SimpleServer"));
             adapter.activate();
             adapter.waitForDeactivate();
