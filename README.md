@@ -7,13 +7,54 @@ The file transfer is encrypted using AES-256 with symmetric key negotiated via c
 - **Gradle 7.2** 
 - **ZeroC Ice 3.7.10** Can be downloaded from their web page here: [Download Ice](https://zeroc.com/ice/downloads/3.7)
 
+## Server and client configuration
+
+If you want to run the programs locally ignore this step
+
 ## Execution
-After making sure that you installed the previours requirements,
-you can run the programs locally by executing the following instructions on the project root.
+
+You can run the programs by following the next instructions.
+
+### Local
+After making sure that you installed the previous requirements,
+do the following on the project root:
 
 1. Build the project
 `./gradlew build`
 2. Run the server
 `java -jar ./server/build/libs/server.jar`
-4. Run the client with the file you want to send as argument
-`java -jar ./client/build/libs/client.jar enviar.txt`
+3. Run the client with the file you want to send as argument
+`java -jar ./client/build/libs/client.jar /path/to/file.txt`
+
+### Remote
+
+1. Install the requirements on client and server machines.
+2. Configure the client and server.
+
+   a. Modify the file `client/src/main/resources/client.cfg` replacing according to your server machine:
+     ```
+        Server.Proxy=SimpleServer:tcp -p SERVER_AVAILABLE_PORT
+        Ice.Default.Host=YOUR_SERVER_IP_ADDRESS
+     ```
+   b. Modify the file `server/src/main/resources/server.cfg` replacing according to your server machine and previous step
+     ```
+        FileAdapter.Endpoints=tcp -p SERVER_AVAILABLE_PORT
+        Ice.Default.Host=YOUR_SERVER_IP_ADDRESS
+     ``` 
+4. Copy the project to your client and server machines.
+
+On the server at the project root:
+
+5. Build the project
+`./gradlew build`
+
+6. Run the server
+`java -jar ./server/build/libs/server.jar`
+
+On the client at the project root:
+
+7. Build the project
+`./gradlew build`
+
+8. Run the client with the file you want to send as argument
+`java -jar ./client/build/libs/client.jar /path/to/file.txt`
